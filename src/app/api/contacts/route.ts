@@ -57,10 +57,24 @@ export async function POST(req: Request) {
       message,
     });
 
-    // Send email notification (don't block response if email fails)
-    sendContactEmail({ name, email, subject, message }).catch((err) =>
-      console.error("Email notification failed:", err)
-    );
+    // Send email notification
+    const emailResult = await sendContactEmail({
+      name,
+      email,
+      subject,
+      message,
+    });
+
+    if (!emailResult.success) {
+      console.error("Email notification failed:", emailResult.error);
+      return NextResponse.json(
+        {
+          error:
+            "Message saved, but failed to send email. Please try again or email directly.",
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { success: true, message: "Thank you for your message!" },

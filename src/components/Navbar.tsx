@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 
@@ -26,9 +27,19 @@ export function Navbar() {
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         <Link
           href="/"
-          className="text-2xl font-bold font-serif tracking-wide hover:opacity-80 transition-opacity text-foreground"
+          className="flex items-center gap-3 text-2xl font-bold font-serif tracking-wide hover:opacity-80 transition-opacity text-foreground"
         >
-          Rithiga <span className="text-primary">S</span>
+          <div className="relative w-10 h-10 overflow-hidden rounded-full border-2 border-primary/20">
+            <Image
+              src="/profile.jpg"
+              alt="Rithiga S"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <span>
+            Rithiga <span className="text-primary">S</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}
