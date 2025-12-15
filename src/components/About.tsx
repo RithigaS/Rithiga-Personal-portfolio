@@ -36,16 +36,23 @@ export function About() {
 
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light">
               <p>
-                I am a Computer Science Engineering student (2023–2027) at Sri
-                Eshwar College of Engineering, Coimbatore, with a CGPA of 9.01.
-                Passionate about building scalable web applications, I
-                specialize in the MERN stack and Next.js.
+                I am a Computer Science and Engineering student (2023–2027) at
+                Sri Eshwar College of Engineering, maintaining a strong academic
+                record with a CGPA of 8.50. I have a solid foundation in
+                full-stack web development, with hands-on experience building
+                modern, scalable applications using MERN stack and Next.js.
               </p>
               <p>
-                With experience in full-stack internships and winning multiple
-                hackathons, I love solving complex problems and learning new
-                technologies. When I'm not coding, I'm exploring new tech trends
-                or contributing to open source.
+                I have completed multiple full-stack internships where I built
+                responsive, production-ready applications using Next.js, React,
+                Node.js, Express, MongoDB, and Tailwind CSS, working on features
+                like authentication, CRUD operations, and admin dashboards,
+                while developing projects such as math tools, blog platforms,
+                e-commerce websites, and task management systems with a strong
+                focus on clean UI, performance, and usability. Passionate about
+                problem-solving and continuous learning, I actively practice
+                DSA, participate in hackathons, and explore modern web
+                technologies to build scalable and impactful solutions.
               </p>
             </div>
           </div>

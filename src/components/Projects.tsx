@@ -2,6 +2,7 @@
 
 import { Github, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface Project {
   _id: string;
@@ -15,6 +16,9 @@ interface Project {
 
 interface ProjectsProps {
   projects: Project[];
+  viewMoreHref?: string;
+  title?: React.ReactNode;
+  description?: string;
 }
 
 /**
@@ -22,19 +26,33 @@ interface ProjectsProps {
  * Redesigned for Professional Feminine Theme.
  * Elegant cards with subtle interactions.
  */
-export function Projects({ projects }: ProjectsProps) {
+export function Projects({
+  projects,
+  viewMoreHref,
+  title = (
+    <>
+      Featured Projects<span className="text-primary">.</span>
+    </>
+  ),
+  description = "A curated selection of my work, showcasing my passion for clean code and problem-solving.",
+}: ProjectsProps) {
   return (
     <section id="projects" className="py-24 bg-background relative">
       <div className="container px-6 mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-serif font-bold mb-6 text-foreground">
-            Featured Projects<span className="text-primary">.</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light">
-            A curated selection of my work, showcasing my passion for clean code
-            and problem-solving.
-          </p>
-        </div>
+        {(title || description) && (
+          <div className="text-center mb-16">
+            {title && (
+              <h2 className="text-4xl font-serif font-bold mb-6 text-foreground">
+                {title}
+              </h2>
+            )}
+            {description && (
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light">
+                {description}
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {projects.map((project, index) => (
@@ -114,6 +132,17 @@ export function Projects({ projects }: ProjectsProps) {
             </motion.div>
           ))}
         </div>
+
+        {viewMoreHref && (
+          <div className="mt-16 text-center">
+            <Link
+              href={viewMoreHref}
+              className="px-8 py-3 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-colors shadow-lg hover:shadow-primary/20 inline-block"
+            >
+              View More Projects
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

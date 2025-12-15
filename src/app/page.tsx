@@ -16,7 +16,9 @@ export const dynamic = "force-dynamic"; // For demo purposes, ensure fresh data
 async function getData() {
   await dbConnect();
 
-  const projects = await Project.find({}).sort({ createdAt: -1 }).lean();
+  const projects = await Project.find({ featured: true })
+    .sort({ createdAt: -1 })
+    .lean();
   const skills = await Skill.find({}).lean();
   const experience = await ExperienceModel.find({}).lean(); // Sort by date if needed
   const achievements = await Achievement.find({}).lean();
@@ -68,10 +70,13 @@ export default async function Home() {
       <Navbar />
       <Hero />
       <About />
-      <Projects projects={data.projects} />
+      <Projects projects={data.projects.slice(0, 3)} viewMoreHref="/projects" />
       <Skills skills={data.skills} />
       <Experience experience={data.experience} />
-      <Contact achievements={data.achievements} />
+      <Contact
+        achievements={data.achievements.slice(0, 3)}
+        viewMoreHref="/achievements"
+      />
 
       <footer className="py-8 text-center text-sm text-muted-foreground border-t bg-secondary/5">
         <p className="font-serif">
