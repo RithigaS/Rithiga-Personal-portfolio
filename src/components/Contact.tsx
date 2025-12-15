@@ -4,6 +4,7 @@ import { CheckCircle, XCircle, Send, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { Achievements } from "./Achievements";
+import { Sparkles } from "./Sparkles";
 import { useForm } from "react-hook-form";
 
 interface Achievement {
@@ -89,9 +90,11 @@ export function Contact({ achievements, viewMoreHref }: ContactProps) {
         {/* Contact Section */}
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-bold mb-6 text-foreground">
-              Get In Touch<span className="text-primary">.</span>
-            </h2>
+            <Sparkles color="hsl(var(--primary))">
+              <h2 className="text-4xl font-serif font-bold mb-6 text-foreground">
+                Get In Touch<span className="text-primary">.</span>
+              </h2>
+            </Sparkles>
             <p className="text-lg text-muted-foreground font-light">
               I'm open to new opportunities and collaborations. Feel free to
               reach out.

@@ -4,36 +4,36 @@
 
 @layer base {
   :root {
-    /* Light Mode - Professional Feminine (Rose Gold/Cream) */
-    --background: 40 33% 98%; /* #FDFBF7 - Soft Cream White */
-    --foreground: 280 5% 17%; /* #2D2A2E - Soft Dark Grey */
+    /* Light Mode - Refined Premium (Crisp White & Rose Gold) */
+    --background: 340 30% 99%; /* Very subtle rose tint white */
+    --foreground: 270 10% 20%; /* Deep charcoal/plum */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 280 5% 17%;
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 270 10% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 280 5% 17%;
+    --popover-foreground: 270 10% 20%;
 
-    --primary: 351 46% 70%; /* #D88E98 - Soft Rose Pink */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 345 50% 60%; /* Richer Rose Gold - Better contrast */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 350 33% 93%; /* #F2E6E8 - Very Light Pink */
-    --secondary-foreground: 345 25% 45%; /* #8E5563 - Deep Rose */
+    --secondary: 340 30% 96%; /* Crisp light pink/grey */
+    --secondary-foreground: 345 40% 40%;
 
-    --muted: 350 33% 93%;
-    --muted-foreground: 280 4% 40%;
+    --muted: 240 5% 96%; /* Cool Grey */
+    --muted-foreground: 270 5% 45%;
 
-    --accent: 345 25% 45%; /* Deep Rose for accents */
+    --accent: 345 40% 50%; /* Deep Mauve */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 351 20% 90%;
-    --input: 351 20% 90%;
-    --ring: 351 46% 70%;
+    --border: 340 20% 92%;
+    --input: 340 20% 92%;
+    --ring: 345 50% 60%;
 
-    --radius: 0.75rem;
+    --radius: 1rem; /* Slightly rounder for modern feel */
   }
 
   /* Dark Mode - Deep Plum/Elegant Dark */
@@ -73,8 +73,28 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
     font-family: var(--font-montserrat), sans-serif;
+    background-image: radial-gradient(
+        at 0% 0%,
+        hsla(351, 46%, 70%, 0.1) 0px,
+        transparent 50%
+      ),
+      radial-gradient(at 100% 0%, hsla(350, 33%, 93%, 0.5) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image: radial-gradient(
+        at 0% 0%,
+        hsla(280, 10%, 12%, 0.3) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 100% 100%,
+        hsla(351, 46%, 70%, 0.05) 0px,
+        transparent 50%
+      );
   }
 
   h1,
@@ -91,7 +111,7 @@
 /* Custom Animations & Utilities */
 @layer utilities {
   .glass {
-    @apply bg-white/70 dark:bg-black/30 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg;
+    @apply bg-white/60 dark:bg-black/30 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none;
   }
 
   .text-gradient {
@@ -113,6 +133,12 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }
 

@@ -3,6 +3,7 @@
 import { Github, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Sparkles } from "./Sparkles";
 
 interface Project {
   _id: string;
@@ -42,9 +43,11 @@ export function Projects({
         {(title || description) && (
           <div className="text-center mb-16">
             {title && (
-              <h2 className="text-4xl font-serif font-bold mb-6 text-foreground">
-                {title}
-              </h2>
+              <Sparkles color="hsl(var(--primary))">
+                <h2 className="text-4xl font-serif font-bold mb-6 text-foreground">
+                  {title}
+                </h2>
+              </Sparkles>
             )}
             {description && (
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light">

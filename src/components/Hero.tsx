@@ -1,100 +1,183 @@
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 /**
- * Hero Component
- * Redesigned for Professional Feminine Theme.
- * Focus on elegance, typography, and soft colors.
+ * Floating Particles Background
+ * Creates a premium, dynamic feel with moving glowing orbs.
  */
+const Particles = () => {
+  const [particles, setParticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Generate random particles only on the client side
+    const newParticles = Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 10 + 2,
+      duration: Math.random() * 20 + 10,
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-primary/20 blur-sm"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+          }}
+          animate={{
+            y: [0, -100, 0],
+            x: [0, Math.random() * 50 - 25, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 export function Hero() {
   return (
     <section
       id="home"
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background"
     >
-      {/* Soft Gradient Background */}
-      <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] animate-blob" />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-secondary/30 rounded-full blur-[100px] animate-blob animation-delay-2000" />
+      {/* 1. Dynamic Background Elements */}
+      <Particles />
+      <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-primary/40 dark:bg-primary/20 rounded-full blur-[120px] animate-blob mix-blend-multiply filter opacity-50 dark:opacity-70" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-secondary/60 dark:bg-secondary/30 rounded-full blur-[120px] animate-blob animation-delay-2000 mix-blend-multiply filter opacity-50 dark:opacity-70" />
 
+      {/* Main Content Container */}
       <div className="container px-6 mx-auto relative z-10 pt-20">
-        <div className="flex flex-col items-center text-center gap-6 md:gap-8 max-w-3xl mx-auto">
-          <div className="space-y-2 animate-fade-in">
-            <p className="text-secondary-foreground/80 font-medium tracking-widest uppercase text-sm md:text-base">
+        <div className="flex flex-col items-center text-center gap-6 md:gap-8 max-w-4xl mx-auto">
+          {/* Animated Entrance Wrapper */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-4"
+          >
+            {/* Greeting */}
+            <p className="text-foreground/60 font-medium tracking-[0.2em] uppercase text-sm md:text-base mb-4">
               Hello, I am
             </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-foreground tracking-tight">
-              Rithiga <span className="text-primary">S</span>
-            </h1>
-          </div>
 
-          <p
-            className="text-lg md:text-xl text-muted-foreground max-w-[600px] mx-auto leading-relaxed animate-slide-up"
-            style={{ animationDelay: "0.2s" }}
+            {/* 2. Gradient Glow & 3. Animated Gradient Text */}
+            <div className="relative inline-block">
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 rounded-full animate-text-gradient" />
+              <h1 className="relative text-6xl md:text-8xl lg:text-9xl font-serif font-bold tracking-tight">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground via-primary to-foreground animate-text-gradient bg-[length:200%_auto]">
+                  Rithiga S
+                </span>
+              </h1>
+            </div>
+          </motion.div>
+
+          {/* Subtitle with slight delay */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-lg md:text-2xl text-muted-foreground max-w-[700px] mx-auto leading-relaxed font-light"
           >
             A passionate{" "}
-            <span className="text-foreground font-semibold">
+            <span className="text-foreground font-medium relative inline-block">
               Full Stack Developer
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary/30" />
             </span>{" "}
             crafting beautiful, intuitive, and scalable digital experiences.
-          </p>
+          </motion.p>
 
-          <div
-            className="flex flex-wrap items-center justify-center gap-4 mt-4 animate-slide-up"
-            style={{ animationDelay: "0.4s" }}
+          {/* Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="flex flex-wrap items-center justify-center gap-6 mt-6"
           >
             <Link
-              href="#projects"
-              className="px-8 py-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25 font-medium tracking-wide"
+              href="/#projects" // Changed to absolute path for routing consistency
+              className="px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25 hover:-translate-y-1"
             >
               View Work
             </Link>
             <Link
               href="/resume.pdf"
               target="_blank"
-              className="px-8 py-3 rounded-full border border-border bg-background/50 hover:bg-secondary transition-all font-medium tracking-wide text-foreground"
+              className="px-8 py-4 rounded-full border border-border bg-background/50 backdrop-blur-sm hover:bg-secondary/50 transition-all font-semibold text-foreground hover:-translate-y-1"
             >
               Resume
             </Link>
-          </div>
+          </motion.div>
 
-          <div
-            className="flex items-center gap-8 mt-8 text-muted-foreground animate-slide-up"
-            style={{ animationDelay: "0.6s" }}
+          {/* Social Icons */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex items-center gap-8 mt-8 text-muted-foreground"
           >
-            <Link
-              href={`https://github.com/${
-                process.env.NEXT_PUBLIC_GITHUB_USERNAME || ""
-              }`}
-              target="_blank"
-              className="hover:text-primary hover:scale-110 transition-all duration-300"
-            >
-              <Github className="w-6 h-6" />
-            </Link>
-            <Link
-              href={`https://linkedin.com/in/${
-                process.env.NEXT_PUBLIC_LINKEDIN_USERNAME || ""
-              }`}
-              target="_blank"
-              className="hover:text-primary hover:scale-110 transition-all duration-300"
-            >
-              <Linkedin className="w-6 h-6" />
-            </Link>
-            <Link
-              href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || ""}`}
-              className="hover:text-primary hover:scale-110 transition-all duration-300"
-            >
-              <Mail className="w-6 h-6" />
-            </Link>
-          </div>
+            {[
+              {
+                icon: Github,
+                href: `https://github.com/${
+                  process.env.NEXT_PUBLIC_GITHUB_USERNAME || ""
+                }`,
+              },
+              {
+                icon: Linkedin,
+                href: `https://linkedin.com/in/${
+                  process.env.NEXT_PUBLIC_LINKEDIN_USERNAME || ""
+                }`,
+              },
+              {
+                icon: Mail,
+                href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || ""}`,
+              },
+            ].map((social, index) => (
+              <Link
+                key={index}
+                href={social.href}
+                target="_blank"
+                className="hover:text-primary hover:scale-110 transition-all duration-300 p-2 hover:bg-secondary/20 rounded-full"
+              >
+                <social.icon className="w-6 h-6" />
+              </Link>
+            ))}
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-        <ArrowDown className="w-6 h-6 text-foreground" />
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5, y: [0, 10, 0] }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          delay: 1,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-foreground"
+      >
+        <ArrowDown className="w-6 h-6" />
+      </motion.div>
     </section>
   );
 }

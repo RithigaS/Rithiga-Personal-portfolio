@@ -1,6 +1,7 @@
 "use client";
 
 import { Briefcase } from "lucide-react";
+import { Sparkles } from "./Sparkles";
 
 interface Experience {
   _id: string;
@@ -24,9 +25,13 @@ export function Experience({ experience }: ExperienceProps) {
   return (
     <section id="experience" className="py-24 bg-secondary/10">
       <div className="container px-6 mx-auto">
-        <h2 className="text-4xl font-serif font-bold text-center mb-16 text-foreground">
-          Experience<span className="text-primary">.</span>
-        </h2>
+        <div className="text-center mb-16">
+          <Sparkles color="hsl(var(--primary))">
+            <h2 className="text-4xl font-serif font-bold text-foreground">
+              Experience<span className="text-primary">.</span>
+            </h2>
+          </Sparkles>
+        </div>
 
         <div className="max-w-4xl mx-auto space-y-12">
           {experience.map((exp, index) => (

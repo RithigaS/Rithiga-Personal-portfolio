@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Sparkles } from "./Sparkles";
 
 interface Skill {
   _id: string;
@@ -24,9 +25,13 @@ export function Skills({ skills }: SkillsProps) {
   return (
     <section id="skills" className="py-24 bg-background relative">
       <div className="container px-6 mx-auto">
-        <h2 className="text-4xl font-serif font-bold text-center mb-16 text-foreground">
-          Skills & Expertise<span className="text-primary">.</span>
-        </h2>
+        <div className="text-center mb-16">
+          <Sparkles color="hsl(var(--primary))">
+            <h2 className="text-4xl font-serif font-bold text-foreground">
+              Skills & Expertise<span className="text-primary">.</span>
+            </h2>
+          </Sparkles>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, categoryIndex) => (
@@ -36,9 +41,14 @@ export function Skills({ skills }: SkillsProps) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
-              className="bg-card/50 hover:bg-card/80 border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300"
+              whileHover={{
+                y: -5,
+                boxShadow: "0 10px 30px -10px rgba(var(--primary), 0.2)",
+              }}
+              className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 shadow-sm transition-all duration-300 relative overflow-hidden group"
             >
-              <h3 className="text-xl font-bold mb-6 text-primary tracking-wide border-b border-primary/10 pb-2 inline-block">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="text-xl font-bold mb-6 text-primary tracking-wide border-b border-primary/10 pb-2 inline-block relative z-10">
                 {category}
               </h3>
 
@@ -46,7 +56,7 @@ export function Skills({ skills }: SkillsProps) {
                 {skills
                   .filter((s) => s.category === category)
                   .map((skill, skillIndex) => (
-                    <div key={skill._id} className="space-y-2">
+                    <div key={skill._id} className="space-y-2 relative z-10">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium text-foreground/80">
                           {skill.name}
@@ -74,21 +84,12 @@ export function Skills({ skills }: SkillsProps) {
                         </div>
                       ) : (
                         // For skills without specific level, show as pills within the category card
-                        <div className="inline-block">
-                          {/* This logic might need adjustment if we want mixing. 
-                                Assuming either all have levels or not per category usually? 
-                                If not, this map will render pills one by one taking full width. 
-                                Let's wrap pills if possible if many exist without levels. 
-                            */}
-                          {/* Correction: The map iterates individually. If we have many non-level skills, they stack. 
-                                Ideally non-level skills should be flex wrapped. 
-                                I'll leave as stacking for consistency or wrap if I can restructure data.
-                                Preserving existing structure.
-                            */}
-                          <span className="inline-block px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium border border-transparent hover:border-primary/20 transition-colors">
-                            {skill.name}
-                          </span>
-                        </div>
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          className="inline-block px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium border border-transparent hover:border-primary/20 transition-colors shadow-sm"
+                        >
+                          {skill.name}
+                        </motion.span>
                       )}
                     </div>
                   ))}
