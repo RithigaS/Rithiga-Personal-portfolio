@@ -67,11 +67,63 @@ export function Hero() {
       {/* Main Content Container */}
       <div className="container px-6 mx-auto relative z-10 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Text Content (Left Side) */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 md:gap-8 max-w-4xl mx-auto lg:mx-0 order-2 lg:order-1">
+          {/* Image Content (Left Side) */}
+          <div className="flex justify-center items-center relative order-1 lg:order-1 mb-10 lg:mb-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96"
+            >
+              {/* Decorative blobs behind image */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-2xl animate-pulse" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-xl -translate-y-1/2 translate-x-1/2" />
+
+              {/* Image Container with Border/Shape */}
+              <div className="relative w-full h-full rounded-[2rem] -rotate-3 overflow-hidden border-4 border-white/50 dark:border-white/10 shadow-2xl group">
+                <Image
+                  src="/profile.jpg"
+                  alt="Rithiga S"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                {/* Glass overly highlight */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+
+              {/* Floating elements near image */}
+              <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute -bottom-6 -right-6 bg-card/80 backdrop-blur-md p-4 rounded-xl shadow-lg border border-primary/10"
+              >
+                <span className="text-2xl">✨</span>
+              </motion.div>
+              <motion.div
+                animate={{ y: [0, 15, 0] }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+                className="absolute -top-6 -left-6 bg-card/80 backdrop-blur-md p-4 rounded-xl shadow-lg border border-primary/10"
+              >
+                <span className="text-2xl">💻</span>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Text Content (Right Side) */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 md:gap-8 max-w-4xl mx-auto lg:mx-0 order-2 lg:order-2">
             {/* Animated Entrance Wrapper */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="space-y-4"
@@ -94,7 +146,7 @@ export function Hero() {
 
             {/* Subtitle with slight delay */}
             <motion.p
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="text-lg md:text-xl text-muted-foreground max-w-[600px] leading-relaxed font-light"
@@ -163,58 +215,6 @@ export function Hero() {
                   <social.icon className="w-6 h-6" />
                 </Link>
               ))}
-            </motion.div>
-          </div>
-
-          {/* Image Content (Right Side) */}
-          <div className="flex justify-center items-center relative order-1 lg:order-2 mb-10 lg:mb-0">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="relative w-64 h-64 md:w-96 md:h-96"
-            >
-              {/* Decorative blobs behind image */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-2xl animate-pulse" />
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-xl -translate-y-1/2 translate-x-1/2" />
-
-              {/* Image Container with Border/Shape */}
-              <div className="relative w-full h-full rounded-[2rem] rotate-3 overflow-hidden border-4 border-white/50 dark:border-white/10 shadow-2xl group">
-                <Image
-                  src="/profile.jpg"
-                  alt="Rithiga S"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  priority
-                />
-                {/* Glass overly highlight */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-
-              {/* Floating elements near image */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -bottom-6 -left-6 bg-card/80 backdrop-blur-md p-4 rounded-xl shadow-lg border border-primary/10"
-              >
-                <span className="text-2xl">✨</span>
-              </motion.div>
-              <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-                className="absolute -top-6 -right-6 bg-card/80 backdrop-blur-md p-4 rounded-xl shadow-lg border border-primary/10"
-              >
-                <span className="text-2xl">💻</span>
-              </motion.div>
             </motion.div>
           </div>
         </div>
